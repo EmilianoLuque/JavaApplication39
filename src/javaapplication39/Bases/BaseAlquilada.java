@@ -62,5 +62,29 @@ public class BaseAlquilada {
         }
         return tot;
     }
+    public Collection buscarAlquiler(int cod){
+        ArrayList todas= new ArrayList();
+        try{
+            Connection con = BD.getIns();
+            Statement smt= con.createStatement();
+            ResultSet set= smt.executeQuery("Select * from alquiladas "
+                    + "where activo=1 and codalq="+cod+"");
+            Alquilada nueva;
+            while(set.next()){
+                nueva= new Alquilada();
+                nueva.setCodAlq(set.getInt("codalq"));
+                nueva.setCodPeli(set.getInt("codpeli"));
+                nueva.setFech(set.getString("fecha"));
+                todas.add(nueva);
+            }
+            smt.close();
+            set.close();
+        }catch(SQLException e){
+            System.out.println(e);
+        }catch(ClassNotFoundException a){
+            System.out.println(a);
+        }
+        return todas;
+    }
     
 }
