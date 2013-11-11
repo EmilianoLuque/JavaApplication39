@@ -274,6 +274,9 @@ public class PanelAlquiler extends JPanel{
         this.add(alquiler);
         this.setVisible(true);
     }
+    public void setFecha(String f){
+        fech.setText(f);
+    }
     public class BotonAlquiler implements ActionListener{
         BaseAlquiler bar= new BaseAlquiler();
         @Override

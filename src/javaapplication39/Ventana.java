@@ -30,7 +30,7 @@ public class Ventana extends Frame {
     CardLayout cartas= new CardLayout();
     JPanel gama= new JPanel(cartas);
     JPanel sep= new JPanel();
-    JPanel stuff= new PanelAlquiler();
+    JPanel stuff= new PanelAlquiler2();
     JPanel stuff2= new Panel2();
     JPanel devolucion= new Devolucion();
     //JPanel imagen= new ListaClientes();

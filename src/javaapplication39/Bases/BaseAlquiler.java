@@ -100,7 +100,7 @@ public class BaseAlquiler {
                 nuevo= new Alquiler();
                 nuevo.setCodClie(set.getInt("codclie"));
                 nuevo.setFechaAlquiler(set.getString("fecha_alq"));
-                nuevo.setMonto(set.getInt("monto"));
+                nuevo.setMonto(set.getFloat("monto"));
                 nuevo.setFechaEntrega(set.getString("fecha_ent"));
                 nuevo.setCodAlq(set.getInt("codalq"));
             }
@@ -127,7 +127,7 @@ public class BaseAlquiler {
                 nuevo.setCodClie(cod);
                 nuevo.setFechaAlquiler(set.getString("fecha_alq"));
                 nuevo.setFechaEntrega(set.getString("fecha_ent"));
-                nuevo.setMonto(set.getInt("monto"));
+                nuevo.setMonto(set.getFloat("monto"));
                 lista.add(nuevo);
             }
             set.close();

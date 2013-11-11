@@ -15,6 +15,7 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javaapplication39.Clases.CompFecha;
+import javaapplication39.Clases.Conversor;
 import javaapplication39.Clases.FechaEnt;
 import javax.swing.JOptionPane;
 /**
@@ -23,17 +24,20 @@ import javax.swing.JOptionPane;
  */
 public class Fecha extends JPanel{
     JLabel fechaac= new JLabel("Fecha actual");
-    JTextField dac= new JTextField("Día");
-    JTextField mac= new JTextField("Mes");
-    JTextField aac= new JTextField("Año");
+    JTextField dac= new JTextField("");
+    JTextField mac= new JTextField("");
+    JTextField aac= new JTextField("");
     JButton aceptaract= new JButton("Aceptar");
     JLabel fechaen= new JLabel("Fecha entrega");
-    JTextField de= new JTextField();
-    JTextField me= new JTextField();
-    JTextField ae= new JTextField();
+    JTextField de= new JTextField("");
+    JTextField me= new JTextField("");
+    JTextField ae= new JTextField("");
     JButton aceptaren= new JButton("Aceptar");
     String fechaent, fechact;
-    public Fecha(){
+    PanelAlqui ap= new PanelAlqui();
+    public Fecha(){}
+    public Fecha(PanelAlqui e){
+        this.ap=e;
         fechaac.setBounds(220, 10, 200, 21);
         fechaac.setForeground(Color.black);
         fechaac.setFont(new Font("Arial",Font.BOLD, 20));
@@ -50,15 +54,11 @@ public class Fecha extends JPanel{
         fechaen.setFont(new Font("Arial",Font.BOLD, 20));
         de.setBounds(150, 141, 50, 21);
         de.setHorizontalAlignment(2);
-        de.setEditable(false);
         me.setBounds(250, 141, 50, 21);
         me.setHorizontalAlignment(2);
-        me.setEditable(false);
         ae.setBounds(350, 141, 50, 21);
         ae.setHorizontalAlignment(2);
-        ae.setEditable(false);
         aceptaren.setBounds(230, 180, 100, 21);
-        aceptaren.setEnabled(false);
         aceptaren.addActionListener(new Botonfecha());
         this.add(aceptaren);
         this.add(me);
@@ -75,45 +75,50 @@ public class Fecha extends JPanel{
         this.setVisible(true);
     }
     public class Botonfecha implements ActionListener{
-
+        int bandera=0;
         @Override
         public void actionPerformed(ActionEvent e) {
             if(e.getSource()==aceptaract){
-                String ds= dac.getText();
-                String ms= mac.getText();
-                String as= aac.getText();
-                CompFecha com= new CompFecha(ds, ms, as);
-                int b=com.comprobar();
-                if(b==1){
-                    JOptionPane.showMessageDialog(null, "Día incorrecto",
-                            "Error", 0);
+                if(dac.getText().equalsIgnoreCase("")) bandera=1;
+                if(mac.getText().equalsIgnoreCase("")) bandera=1;
+                if(aac.getText().equalsIgnoreCase("")) bandera=1;
+                if(bandera==0){
+                    String ds= dac.getText();
+                    String ms= mac.getText();
+                    String as= aac.getText();
+                    CompFecha com= new CompFecha(ds, ms, as);
+                    int b=com.comprobar();
+                    if(b==1){
+                        JOptionPane.showMessageDialog(null, "Día incorrecto",
+                                "Error", 0);
+                    }
+                    if(b==2){
+                        JOptionPane.showMessageDialog(null, "Mes incorrecto",
+                                "Error", 0);
+                    }
+                    if(b==3){
+                        JOptionPane.showMessageDialog(null, "Año incorrecto",
+                                "Error", 0);
+                    }
+                    if(b==0){
+                        Conversor con= new Conversor(ds,ms,as);
+                        FechaEnt comp= new FechaEnt(ds, ms, as);
+                        String fecha= comp.calc();
+                        String den=fecha.substring(0,2);
+                        String men= fecha.substring(3, 5);
+                        String aen= fecha.substring(6);
+                        de.setText(den);
+                        me.setText(men);
+                        ae.setText(aen);
+                        dac.setText(con.getDa());
+                        mac.setText(con.getMa());
+                        fechact= con.getFecha();
+                        ap.fechact=fechact;
+                    }
                 }
-                if(b==2){
-                    JOptionPane.showMessageDialog(null, "Mes incorrecto",
-                            "Error", 0);
-                }
-                if(b==3){
-                    JOptionPane.showMessageDialog(null, "Año incorrecto",
-                            "Error", 0);
-                }
-                if(b==0){
-                    //guardo en fechaac
-                    FechaEnt comp= new FechaEnt(ds, ms, as);
-                    String fecha= comp.calc();
-                    String den=fecha.substring(0,2);
-                    String men= fecha.substring(3, 5);
-                    String aen= fecha.substring(6);
-                    de.setText(den);
-                    de.setEditable(true);
-                    me.setText(men);
-                    me.setEditable(true);
-                    ae.setText(aen);
-                    ae.setEditable(true);
-                    dac.setEditable(false);
-                    mac.setEditable(false);
-                    aac.setEditable(false);
-                    aceptaract.setEnabled(false);
-                    aceptaren.setEnabled(true);
+                else{
+                    bandera=0;
+                    JOptionPane.showMessageDialog(null, "Campo Incompleto","Error", 0);
                 }
             }
             if(e.getSource()==aceptaren){
@@ -137,10 +142,12 @@ public class Fecha extends JPanel{
                 }
                 if(ba==0){
                     //guardo en fechaent
-                    de.setEditable(false);
-                    me.setEditable(false);
-                    ae.setEditable(false);
-                    aceptaren.setEnabled(false);
+                    Conversor confin= new Conversor(des, mes,aes);
+                    de.setText(confin.getDa());
+                    me.setText(confin.getMa());
+                    fechaent= confin.getFecha();
+                    ap.fech.setText(fechaent);
+                    ap.fechent=fechaent;
                 }
             }
         }

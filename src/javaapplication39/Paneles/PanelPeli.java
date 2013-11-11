@@ -12,7 +12,10 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javaapplication39.Bases.BaseAlquilada;
+import javaapplication39.Bases.BaseAlquiler;
 import javaapplication39.Bases.BasePelicula;
+import javaapplication39.Bases.BasePrecio;
+import javaapplication39.Clases.Alquilada;
 import javaapplication39.Clases.Pelicula;
 import javax.swing.JOptionPane;
 /**
@@ -30,7 +33,13 @@ public class PanelPeli extends JPanel{
     JLabel gen= new JLabel("Género");
     JTextField gent= new JTextField();
     JButton agregar= new JButton("Agregar");
-    public PanelPeli(){
+    Fecha fecha= new Fecha();
+    PanelAlqui ap= new PanelAlqui();
+    int cantidad=0;
+    public PanelPeli(){};
+    public PanelPeli(Fecha f, PanelAlqui e){
+        this.ap=e;
+        this.fecha=f;
         codpeli.setBounds(20, 20, 200, 21);
         codpeli.setFont(new Font("Arial",Font.BOLD, 20));
         codpeli.setForeground(Color.black);
@@ -72,22 +81,30 @@ public class PanelPeli extends JPanel{
     public class BotonPeli implements ActionListener{
         BasePelicula bp= new BasePelicula();
         BaseAlquilada ba= new BaseAlquilada();
+        BaseAlquiler bar= new BaseAlquiler();
+        BasePrecio bo= new BasePrecio();
         Pelicula nueva;
         int cod=0;
+        float pre;
         @Override
         public void actionPerformed(ActionEvent e){
             if(e.getSource()==buscar){
-                cod= Integer.parseInt(codpet.getText());
-                if(bp.comprobarPeli(cod)==1){
-                    nueva= new Pelicula();
-                    nueva= bp.buscarPelicula(cod);
-                    titt.setText(nueva.getTitulo());
-                    formtt.setText(nueva.getFormato());
-                    gent.setText(nueva.getGenero());
-                    agregar.setEnabled(true);
-                }else{
-                    JOptionPane.showMessageDialog(null,"El código es incorrecto"
+                if(codpet.getText().equalsIgnoreCase(""))
+                    JOptionPane.showMessageDialog(null,"Ingrese un código"
                             ,"Error",0);
+                else{
+                    cod= Integer.parseInt(codpet.getText());
+                    if(bp.comprobarPeli(cod)==1){
+                        nueva= new Pelicula();
+                        nueva= bp.buscarPelicula(cod);
+                        titt.setText(nueva.getTitulo());
+                        formtt.setText(nueva.getFormato());
+                        gent.setText(nueva.getGenero());
+                        agregar.setEnabled(true);
+                    }else{
+                        JOptionPane.showMessageDialog(null,"El código es incorrecto"
+                                ,"Error",0);
+                    }
                 }
             }
             if(e.getSource()==agregar){
@@ -95,18 +112,29 @@ public class PanelPeli extends JPanel{
                 nueva= bp.buscarPelicula(cod);
                 int codp= nueva.getCodigo();
                 int ejem= nueva.getEjemplares();
-                if(ba.buscar(cod) <ejem){
-                    //aumento la cantidad de peliculas
-                    //genero un registro en alquiladas
-                    titt.setText("");
-                    formtt.setText("");
-                    gent.setText("");
-                    codpet.setText("");
-                    agregar.setEnabled(false);
+                fecha.aceptaren.isEnabled();
+                if(fecha.ae.getText().equalsIgnoreCase("")){
+                    JOptionPane.showMessageDialog(null,"Ingrese un fecha antes.", "Mensaje",1);
                 }
                 else{
-                    JOptionPane.showMessageDialog(null, "La película está fuera"
-                            + " de stock.", "Error", 1);
+                    if(ba.buscar(cod) <ejem){
+                        int codalq= bar.codigoMayor()+1;
+                        Alquilada registro= new Alquilada(codalq, codp, fecha.fechact);
+                        ba.agregar(registro);
+                        titt.setText("");
+                        formtt.setText("");
+                        gent.setText("");
+                        codpet.setText("");
+                        agregar.setEnabled(true);
+                        pre= bo.getPrecio();
+                        ap.cantidad++;
+                        ap.pel.setText(Integer.toString(ap.cantidad));
+                        ap.mont.setText(Float.toString(pre*ap.cantidad));
+                    }
+                    else{
+                        JOptionPane.showMessageDialog(null, "La película está fuera"
+                                + " de stock.", "Error", 1);
+                    }
                 }
             }
         }

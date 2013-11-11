@@ -73,7 +73,7 @@ public class FechaEnt {
                     else ds=Integer.toString(d+1);
                 }//else
             }//m==12
-            if(m==4||m==6||m==9){
+            if(m==4||m==6||m==9||m==11){
                 if(d==30){
                     ds="01";
                     if(m==9) ms="10";

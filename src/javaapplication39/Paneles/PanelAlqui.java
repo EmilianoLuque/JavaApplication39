@@ -11,8 +11,10 @@ import javax.swing.JPanel;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javaapplication39.Bases.BaseAlquilada;
 import javaapplication39.Bases.BaseAlquiler;
 import javaapplication39.Bases.BaseCliente;
+import javaapplication39.Clases.Alquiler;
 import javax.swing.JOptionPane;
 /**
  *
@@ -29,6 +31,11 @@ public class PanelAlqui extends JPanel {
     JTextField mont= new JTextField();
     JButton aceptar= new JButton("Aceptar");
     JButton cancelar= new JButton("Cancelar");
+    String fechent, fechact;
+    int cantidad=0;
+    /*Fecha f= new Fecha();
+    PanelPeli p= new PanelPeli();
+    PanelCliente c= new PanelCliente();*/
     public PanelAlqui(){
         cliente.setBounds(20, 20, 200, 21);
         cliente.setFont(new Font("Arial",Font.BOLD, 20));
@@ -52,7 +59,9 @@ public class PanelAlqui extends JPanel {
         mont.setEditable(false);
         aceptar.setBounds(100, 180, 100, 21);
         aceptar.setEnabled(true);
+        aceptar.addActionListener(new BotonAlquiler());
         cancelar.setBounds(300, 180, 100, 21);
+        cancelar.addActionListener(new BotonAlquiler());
         this.add(aceptar);
         this.add(cancelar);
         this.add(mont);
@@ -69,13 +78,102 @@ public class PanelAlqui extends JPanel {
     }
     public class BotonAlquiler implements ActionListener{
         BaseAlquiler bar= new BaseAlquiler();
+        BaseAlquilada ba= new BaseAlquilada();
+        int bandera=0;
         @Override
         public void actionPerformed(ActionEvent e){
             if(e.getSource()==aceptar){
-                int codalquiler= bar.codigoMayor()+1;
+                if(clie.getText().equalsIgnoreCase("")){
+                    JOptionPane.showMessageDialog(null, "No Ingreso un cliente", "Error", 0);
+                    bandera=1;
+                }
+                if(pel.getText().equalsIgnoreCase("")){
+                    JOptionPane.showMessageDialog(null, "No Ingreso una pelicula", "Error", 0);
+                    bandera=1;
+                }
+                if(fech.getText().equalsIgnoreCase("")){
+                    JOptionPane.showMessageDialog(null, "No Ingreso una fecha", "Error", 0);
+                    bandera=1;
+                }
+                if(mont.getText().equalsIgnoreCase("")){
+                    JOptionPane.showMessageDialog(null, "Error de monto", "Error", 0);
+                    bandera=1;
+                }
+                if(bandera==0){
+                    int codclie= Integer.parseInt(clie.getText());
+                    float monot= Float.parseFloat(mont.getText());
+                    int codalqui= bar.codigoMayor()+1;
+                    /*String entrega= f.fechaent;
+                    String actual= f.fechact;*/
+                    Alquiler nuevo= new Alquiler(codclie, fechact, monot, fechent, codalqui);
+                    bar.agregar(nuevo);
+                    //limpio todo
+                    mont.setText("");
+                    fech.setText("");
+                    pel.setText("");
+                    clie.setText("");
+                    fechact="";
+                    fechent="";
+                    JOptionPane.showMessageDialog(null, "Alquiler almacenado", "Mensaje", 1);
+                    /*c.codt.setText("");
+                    c.nombt.setText("");
+                    c.dnit.setText("");
+                    f.dac.setText("");
+                    f.dac.setEditable(true);
+                    f.mac.setText("");
+                    f.mac.setEditable(true);
+                    f.aac.setText("");
+                    f.aac.setEditable(true);
+                    f.aceptaract.setEnabled(true);
+                    f.ae.setText("");
+                    f.ae.setEditable(false);
+                    f.de.setText("");
+                    f.de.setEditable(false);
+                    f.me.setText("");
+                    f.me.setEditable(false);
+                    f.aceptaren.setEnabled(false);
+                    p.codpet.setText("");
+                    p.titt.setText("");
+                    p.formtt.setText("");
+                    p.gent.setText("");
+                    p.agregar.setEnabled(false);
+                    p.cantidad=0;*/
+                }
+                bandera=0;
             }
             if(e.getSource()==cancelar){
-                
+                mont.setText("");
+                fech.setText("");
+                pel.setText("");
+                clie.setText("");
+                fechact="";
+                fechent="";
+                JOptionPane.showMessageDialog(null, "Alquiler cancelado", "Mensaje", 1);
+                /*c.codt.setText("");
+                c.nombt.setText("");
+                c.dnit.setText("");
+                f.dac.setText("");
+                f.dac.setEditable(true);
+                f.mac.setText("");
+                f.mac.setEditable(true);
+                f.aac.setText("");
+                f.aac.setEditable(true);
+                f.aceptaract.setEnabled(true);
+                f.ae.setText("");
+                f.ae.setEditable(false);
+                f.de.setText("");
+                f.de.setEditable(false);
+                f.me.setText("");
+                f.me.setEditable(false);
+                f.aceptaren.setEnabled(false);
+                p.codpet.setText("");
+                p.titt.setText("");
+                p.formtt.setText("");
+                p.gent.setText("");
+                p.agregar.setEnabled(false);
+                p.cantidad=0;
+                int negar= bar.codigoMayor()+1;
+                ba.desactivo(negar);*/
             }
         }
     }

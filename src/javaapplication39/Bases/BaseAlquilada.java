@@ -68,7 +68,7 @@ public class BaseAlquilada {
             Connection con = BD.getIns();
             Statement smt= con.createStatement();
             ResultSet set= smt.executeQuery("Select * from alquiladas "
-                    + "where activo=1 and codalq="+cod+"");
+                    + "where activo='1' AND codalq='"+cod+"'");
             Alquilada nueva;
             while(set.next()){
                 nueva= new Alquilada();

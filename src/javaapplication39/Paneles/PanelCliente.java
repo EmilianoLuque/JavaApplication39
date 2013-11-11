@@ -30,7 +30,10 @@ public class PanelCliente extends JPanel{
     BaseCliente bc= new BaseCliente();
     int codint;
     Cliente nuevo= new Cliente();
-    public PanelCliente(){
+    PanelAlqui ap= new PanelAlqui();
+    public PanelCliente(){}
+    public PanelCliente(PanelAlqui e){
+        this.ap=e;
         //this.setSize(497, 232);
         this.setLayout(null);
         codigo.setBounds(20, 20, 200, 30);
@@ -70,11 +73,12 @@ public class PanelCliente extends JPanel{
             if(cods.equalsIgnoreCase("")) b=1;
             if(b==0){
                 cod= Integer.parseInt(cods);
-                cods="";
+                //cods="";
                 nuevo=bc.buscarCliente(cod);
                 if(nuevo!=null){
                     nombt.setText(nuevo.getNomb());
                     dnit.setText(Integer.toString(nuevo.getDni()));
+                    ap.clie.setText(cods);
                 }
                 else{
                     JOptionPane.showMessageDialog(null, "El cliente no está en"
