@@ -22,9 +22,9 @@ public class PanelAlquiler2 extends JPanel{
     public PanelAlquiler2(){
         this.setLayout(null);
         cp.setBounds(0, 0, 497, 232);
-        fp.setBounds(497, 0, 497, 232);
+        fp.setBounds(497, 0, 498, 232);
         pp.setBounds(0, 232, 497, 232);
-        ap.setBounds(497, 232, 497, 232);
+        ap.setBounds(497, 232, 498, 232);
         this.add(cp);
         this.add(fp);
         this.add(pp);

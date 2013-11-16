@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import javaapplication39.Bases.BaseAlquilada;
 import javaapplication39.Bases.BaseAlquiler;
 import javaapplication39.Bases.BaseCliente;
+import javaapplication39.Bases.BaseMulta;
 import javaapplication39.Bases.BasePelicula;
 import javaapplication39.Bases.BasePrecio;
 import javaapplication39.Clases.Alquilada;
@@ -20,6 +21,7 @@ import javaapplication39.Clases.CalcularMulta;
 import javaapplication39.Clases.Cliente;
 import javaapplication39.Clases.CompFecha;
 import javaapplication39.Clases.Conversor;
+import javaapplication39.Clases.Multa;
 import javaapplication39.Clases.Pelicula;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -60,6 +62,7 @@ public class Devolucion extends JPanel {
     JButton fe= new JButton("Aceptar");
     JButton al= new JButton("Retornar");
     String Fechaactual;
+    int CodigoClie;
     public Devolucion(){
         this.setLayout(null);
         cliecod.setBounds(20, 10, 150, 30);
@@ -179,7 +182,11 @@ public class Devolucion extends JPanel {
                 if(todos.isEmpty()){
                     JOptionPane.showMessageDialog(null,"No hay ningún alquiler "
                             + "para ese cliente.","Mensaje",1);
-                    scroll.setVisible(false);
+                    lista.setVisible(false);
+                    diat.setEditable(false);
+                    mest.setEditable(false);
+                    aniot.setEditable(false);
+                    fe.setEnabled(false);
                 }
                 else{
                     String columnas[]={"Codigo de Alquiler","Monto","Fecha","Cliente","Pelicula"};
@@ -223,6 +230,7 @@ public class Devolucion extends JPanel {
                     mest.setEditable(true);
                     aniot.setEditable(true);
                     fe.setEnabled(true);
+                    CodigoClie= codint;
                 }//else vacia
             }//else campo
         }//action performed
@@ -261,6 +269,7 @@ public class Devolucion extends JPanel {
     public class BotonAlqui implements ActionListener{
         BaseAlquiler ba= new BaseAlquiler();
         BasePrecio bp= new BasePrecio();
+        BaseMulta bm= new BaseMulta();
         float tot=0, pre=0;
         @Override
         public void actionPerformed(ActionEvent e){
@@ -275,8 +284,14 @@ public class Devolucion extends JPanel {
                 pre=bp.getPrecio();
                 tot= pre*multa;
                 if(multa>0){
+                    int codmul= bm.codMayor()+1;
+                    System.out.println(codmul);
+                    Multa mul= new Multa(CodigoClie, tot, codmul);
+                    bm.agregar(mul);
                     JOptionPane.showMessageDialog(null,"Se ha creado una multa de $"
                             +tot,"Mensaje",1);
+                    //desactivar el alquiler
+                    
                 }//multa
             }//else
         }//action

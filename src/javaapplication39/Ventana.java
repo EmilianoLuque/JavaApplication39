@@ -33,10 +33,11 @@ public class Ventana extends Frame {
     JPanel stuff= new PanelAlquiler2();
     JPanel stuff2= new Panel2();
     JPanel devolucion= new Devolucion();
+    JPanel multap= new PanelMulta();
     //JPanel imagen= new ListaClientes();
     //JPanel paneles= new PanelConPaneles();
     JPanel peli= new AddPelicula();
-    JButton jinx, drav, happy, duel, mantra,molten;
+    JButton jinx, drav, happy, duel, mantra,molten, multa;
     JLabel uno= new JLabel("uno");
     JLabel dos= new JLabel("dos");
     Icon j= new ImageIcon(getClass().getResource("iconos/Get Excited!.jpg"));
@@ -74,6 +75,8 @@ public class Ventana extends Frame {
         molten= new JButton(null,dev);
         molten.setBorderPainted(false);
         molten.setContentAreaFilled(false);
+        multa= new JButton("Multas");
+        
         
         gama.setLayout(cartas);
         //uno.setForeground(Color.red);
@@ -86,12 +89,14 @@ public class Ventana extends Frame {
 //        gama.add(paneles,"4");
         gama.add(peli,"5");
         gama.add(devolucion,"6");
+        gama.add(multap, "7");
         jinx.addActionListener(new GestionBoton());
         drav.addActionListener(new GestionBoton());
         happy.addActionListener(new GestionBoton());
         duel.addActionListener(new GestionBoton());
         mantra.addActionListener(new GestionBoton());
         molten.addActionListener(new GestionBoton());
+        multa.addActionListener(new GestionBoton());
         
         beta.add(jinx);
         beta.add(drav);
@@ -99,6 +104,7 @@ public class Ventana extends Frame {
         beta.add(duel);
         beta.add(mantra);
         beta.add(molten);
+        beta.add(multa);
         //-----------ventana
         this.setLayout(null);
         this.setResizable(false);
@@ -125,6 +131,7 @@ public class Ventana extends Frame {
             }
             if(e.getSource()==mantra) cartas.show(gama, "5");
             if(e.getSource()==molten) cartas.show(gama, "6");
+            if(e.getSource()==multa) cartas.show(gama, "7");
         }
     }   
 }

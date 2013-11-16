@@ -20,10 +20,12 @@ public class BaseMulta {
         try{
             Connection con= BD.getIns();
             PreparedStatement smt= con.prepareStatement("Insert into multa"
-                    + " (codclie, monto, activa) values (?,?,?)");
+                    + " (codclie, monto, activa, fpago, codmulta) values (?,?,?,?,?)");
             smt.setInt(1, nueva.getCod());
             smt.setFloat(2,nueva.getMonto());
             smt.setInt(3,1);
+            smt.setString(4,"");
+            smt.setInt(5, nueva.getCodMul());
             smt.execute();
         }catch(SQLException e){
             System.out.println(e);
@@ -54,6 +56,7 @@ public class BaseMulta {
                 nueva= new Multa();
                 nueva.setCod(set.getInt("codclie"));
                 nueva.setMont(set.getFloat("monto"));
+                nueva.setCodMul(set.getInt("codmulta"));
             }
             set.close();
             smt.close();
@@ -63,5 +66,22 @@ public class BaseMulta {
             System.out.println(a);
         }
         return nueva;
+    }
+    public int codMayor(){
+        int ret=0;
+        try{
+            Connection con= BD.getIns();
+            Statement smt= con.createStatement();
+            ResultSet set= smt.executeQuery("Select max(codmulta) as maxi from multa");
+            while(set.next())
+                if(ret<set.getInt("maxi")) ret= set.getInt("maxi");
+            smt.close();
+            set.close();
+        }catch(SQLException e){
+            System.out.println(e);
+        }catch(ClassNotFoundException a){
+            System.out.println(a);
+        }
+        return ret;
     }
 }
