@@ -34,7 +34,6 @@ public class PanelCliente extends JPanel{
     public PanelCliente(){}
     public PanelCliente(PanelAlqui e){
         this.ap=e;
-        //this.setSize(497, 232);
         this.setLayout(null);
         codigo.setBounds(20, 20, 200, 30);
         codigo.setFont(new Font("Arial",Font.BOLD, 20));

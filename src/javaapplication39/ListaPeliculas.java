@@ -16,7 +16,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Usuario Normal
  */
-public class Lista extends JPanel {
+public class ListaPeliculas extends JPanel {
     JPanel orden= new JPanel();
     ArrayList lista= new ArrayList();
     JTable tabla;
@@ -35,7 +35,7 @@ public class Lista extends JPanel {
     JLabel autor= new JLabel("Autor");
     JLabel ejemplares= new JLabel("Ejemplares");
     JScrollPane scroll= new JScrollPane();
-    public Lista(){
+    public ListaPeliculas(){
         //-------bptpmes
         botones.setLayout(null);
         busc.setBounds(32, 20, 100, 20);

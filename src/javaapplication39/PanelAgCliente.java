@@ -20,7 +20,7 @@ import javax.swing.JOptionPane;
  *
  * @author Usuario Normal
  */
-public class Panel2 extends JPanel{
+public class PanelAgCliente extends JPanel{
     JLabel nombre= new JLabel("Nombre");
     JLabel apellido= new JLabel("Apellido");
     JLabel telefono= new JLabel("Teléfono");
@@ -33,7 +33,7 @@ public class Panel2 extends JPanel{
     JTextField dn= new JTextField();
     JButton agregar= new JButton("Afiliar");
     JPanel datos= new JPanel(null);
-    public Panel2(){
+    public PanelAgCliente(){
         this.setLayout(new BorderLayout());
         datos.setBounds(0, 0, 995, 465);
         nombre.setBounds(380, 20, 100, 20);

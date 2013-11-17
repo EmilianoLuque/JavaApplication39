@@ -3,7 +3,6 @@
  * and open the template in the editor.
  */
 package javaapplication39.Clases;
-import java.util.ArrayList;
 /**
  *
  * @author Usuario Normal

@@ -6,12 +6,9 @@ package javaapplication39;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
-import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import javax.swing.JPanel;
 import javax.swing.JButton;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
 import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -25,25 +22,17 @@ public class Ventana extends JFrame {
     CardLayout cartas= new CardLayout();
     JPanel gama= new JPanel(cartas);
     JPanel sep= new JPanel();
-    JPanel alquiler= new PanelAlquiler2();
-    JPanel clientenuevo= new Panel2();
+    JPanel alquiler= new PanelAlquiler();
+    JPanel clientenuevo= new PanelAgCliente();
     JPanel devolucion= new Devolucion();
     JPanel multap= new PanelMulta();
     JPanel recauda= new Recaudado();
     JPanel prop= new PanelPrecio();
-    //JPanel imagen= new ListaClientes();
-    //JPanel paneles= new PanelConPaneles();
     JPanel peli= new AddPelicula();
     JButton alqui, agcliente, listcliente, listpeliculas, agpelicula,devo, multa;
     JButton recaudado, propi;
     JLabel uno= new JLabel("uno");
     JLabel dos= new JLabel("dos");
-    Icon j= new ImageIcon(getClass().getResource("iconos/Get Excited!.jpg"));
-    Icon d= new ImageIcon(getClass().getResource("iconos/LeagueofDraven.jpg"));
-    Icon c= new ImageIcon(getClass().getResource("iconos/Happy_Hour.jpg"));
-    Icon e= new ImageIcon(getClass().getResource("iconos/Duelist.jpg"));
-    Icon m= new ImageIcon(getClass().getResource("iconos/Mantra.jpg"));
-    Icon dev= new ImageIcon(getClass().getResource("iconos/Molten_Shield.jpg"));
     public Ventana(){
         super("Beta");
         //---------paneles
@@ -111,7 +100,7 @@ public class Ventana extends JFrame {
                 cartas.show(gama, "3");
             }
             if(e.getSource()==listpeliculas){
-                JPanel paneles= new PanelConPaneles();
+                JPanel paneles= new ListaPeliculas();
                 gama.add(paneles,"4");
                 cartas.show(gama, "4");
             }

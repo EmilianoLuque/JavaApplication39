@@ -3,10 +3,7 @@
  * and open the template in the editor.
  */
 package javaapplication39.Paneles;
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.FlowLayout;
-import java.awt.GridLayout;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.JButton;

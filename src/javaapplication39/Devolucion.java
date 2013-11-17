@@ -153,7 +153,7 @@ public class Devolucion extends JPanel {
         lista.setBounds(150,30,850,395);
         codigo.setLayout(null);
         codigo.setBounds(150,395,850,70);
-        codigo.setBackground(Color.green);
+        codigo.setBackground(Color.getHSBColor(0.67f, .5f,0.5f));
         this.setBackground(Color.darkGray);
         this.add(codigo);
         this.add(lista);
