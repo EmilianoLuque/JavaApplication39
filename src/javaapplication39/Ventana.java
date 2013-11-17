@@ -3,11 +3,8 @@
  * and open the template in the editor.
  */
 package javaapplication39;
-import java.awt.Button;
-import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
-import java.awt.Container;
 import java.awt.FlowLayout;
 import java.awt.Frame;
 import java.awt.event.ActionEvent;
@@ -16,28 +13,29 @@ import javax.swing.JButton;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import java.awt.event.ActionListener;
-import javax.swing.JOptionPane;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
-import java.awt.Font;
-import java.awt.GridLayout;
 
 /**
  *
  * @author Usuario Normal
  */
-public class Ventana extends Frame {
+public class Ventana extends JFrame {
     JPanel beta= new JPanel();
     CardLayout cartas= new CardLayout();
     JPanel gama= new JPanel(cartas);
     JPanel sep= new JPanel();
-    JPanel stuff= new PanelAlquiler2();
-    JPanel stuff2= new Panel2();
+    JPanel alquiler= new PanelAlquiler2();
+    JPanel clientenuevo= new Panel2();
     JPanel devolucion= new Devolucion();
     JPanel multap= new PanelMulta();
+    JPanel recauda= new Recaudado();
+    JPanel prop= new PanelPrecio();
     //JPanel imagen= new ListaClientes();
     //JPanel paneles= new PanelConPaneles();
     JPanel peli= new AddPelicula();
-    JButton jinx, drav, happy, duel, mantra,molten, multa;
+    JButton alqui, agcliente, listcliente, listpeliculas, agpelicula,devo, multa;
+    JButton recaudado, propi;
     JLabel uno= new JLabel("uno");
     JLabel dos= new JLabel("dos");
     Icon j= new ImageIcon(getClass().getResource("iconos/Get Excited!.jpg"));
@@ -50,88 +48,78 @@ public class Ventana extends Frame {
         super("Beta");
         //---------paneles
         this.setBounds(50, 50, 1000, 600);
-        beta.setBounds(0,25,1000,100);
+        beta.setBounds(0,0,1000,100);
         beta.setBackground(Color.getHSBColor(0.75f, 1f,0.5f));
         beta.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 10));
-        gama.setBounds(2,135, 995, 465);
-        sep.setBounds(2,125,1000,10);
+        gama.setBounds(0,110, 995, 465);
+        sep.setBounds(0,100,1000,10);
         sep.setBackground(Color.BLACK);
         //------------------botones
-        jinx= new JButton(null,j);
-        jinx.setBorderPainted(false);
-        jinx.setContentAreaFilled(false);
-        drav= new JButton(null,d);
-        drav.setBorderPainted(false);
-        drav.setContentAreaFilled(false);
-        happy= new JButton(null,c);
-        happy.setBorderPainted(false);
-        happy.setContentAreaFilled(false);
-        duel= new JButton(null,e);
-        duel.setBorderPainted(false);
-        duel.setContentAreaFilled(false);
-        mantra= new JButton(null,m);
-        mantra.setBorderPainted(false);
-        mantra.setContentAreaFilled(false);
-        molten= new JButton(null,dev);
-        molten.setBorderPainted(false);
-        molten.setContentAreaFilled(false);
+        alqui= new JButton("Alquiler");
+        agcliente= new JButton("Agregar Cliente");
+        listcliente= new JButton("Lista de Clientes");
+        listpeliculas= new JButton("Peliculas");
+        agpelicula= new JButton("Agregar Pelicula");
+        devo= new JButton("Devolución");
         multa= new JButton("Multas");
-        
-        
+        recaudado= new JButton("Recaudación");
+        propi= new JButton("Propiedades");
         gama.setLayout(cartas);
-        //uno.setForeground(Color.red);
-        //stuff2.add(dos);
-        //stuff2.setBackground(Color.red);
         //---------agregar cartas
-        gama.add(stuff,"1");
-        gama.add(stuff2,"2");
-//        gama.add(imagen,"3");
-//        gama.add(paneles,"4");
+        gama.add(alquiler,"1");
+        gama.add(clientenuevo,"2");
         gama.add(peli,"5");
         gama.add(devolucion,"6");
         gama.add(multap, "7");
-        jinx.addActionListener(new GestionBoton());
-        drav.addActionListener(new GestionBoton());
-        happy.addActionListener(new GestionBoton());
-        duel.addActionListener(new GestionBoton());
-        mantra.addActionListener(new GestionBoton());
-        molten.addActionListener(new GestionBoton());
+        gama.add(recauda,"8");
+        gama.add(prop,"9");
+        alqui.addActionListener(new GestionBoton());
+        agcliente.addActionListener(new GestionBoton());
+        listcliente.addActionListener(new GestionBoton());
+        listpeliculas.addActionListener(new GestionBoton());
+        agpelicula.addActionListener(new GestionBoton());
+        devo.addActionListener(new GestionBoton());
         multa.addActionListener(new GestionBoton());
-        
-        beta.add(jinx);
-        beta.add(drav);
-        beta.add(happy);
-        beta.add(duel);
-        beta.add(mantra);
-        beta.add(molten);
+        recaudado.addActionListener(new GestionBoton());
+        propi.addActionListener(new GestionBoton());
+        beta.add(alqui);
+        beta.add(agcliente);
+        beta.add(listcliente);
+        beta.add(listpeliculas);
+        beta.add(agpelicula);
+        beta.add(devo);
         beta.add(multa);
+        beta.add(recaudado);
+        beta.add(propi);
         //-----------ventana
         this.setLayout(null);
         this.setResizable(false);
         this.add(sep);
         this.add(beta);
         this.add(gama);
-        this.addWindowListener(new GestionVentana());
+        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setVisible(true);
     }
     public class GestionBoton implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e){
-            if(e.getSource()==jinx) cartas.show(gama, "1");
-            if(e.getSource()==drav) cartas.show(gama, "2");
-            if(e.getSource()==happy){
+            if(e.getSource()==alqui) cartas.show(gama, "1");
+            if(e.getSource()==agcliente) cartas.show(gama, "2");
+            if(e.getSource()==listcliente){
                 JPanel imagen= new ListaClientes();
                 gama.add(imagen,"3");
                 cartas.show(gama, "3");
             }
-            if(e.getSource()==duel){
+            if(e.getSource()==listpeliculas){
                 JPanel paneles= new PanelConPaneles();
                 gama.add(paneles,"4");
                 cartas.show(gama, "4");
             }
-            if(e.getSource()==mantra) cartas.show(gama, "5");
-            if(e.getSource()==molten) cartas.show(gama, "6");
+            if(e.getSource()==agpelicula) cartas.show(gama, "5");
+            if(e.getSource()==devo) cartas.show(gama, "6");
             if(e.getSource()==multa) cartas.show(gama, "7");
+            if(e.getSource()==recaudado) cartas.show(gama, "8");
+            if(e.getSource()==propi) cartas.show(gama, "9");
         }
     }   
 }

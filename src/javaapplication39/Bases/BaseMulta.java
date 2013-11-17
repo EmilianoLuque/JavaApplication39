@@ -9,6 +9,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.Collection;
 import javaapplication39.Clases.Multa;
 
 /**
@@ -33,11 +35,11 @@ public class BaseMulta {
             System.out.println(a);
         }
     }
-    public void cancelar(int cod){
+    public void cancelar(int cod, String fecha){
         try{
             Connection con= BD.getIns();
             PreparedStatement smt= con.prepareStatement("Update multa set "
-                    + " activa=0 where codclie="+cod);
+                    + " activa=0, fpago='"+fecha+"' where codmulta="+cod);
             smt.execute();
         }catch(SQLException e){
             System.out.println(e);
@@ -45,18 +47,20 @@ public class BaseMulta {
             System.out.println(a);
         }
     }
-    public Multa buscar(int cod){
-        Multa nueva=null;
+    public Collection buscar(int cod){
+        ArrayList lista= new ArrayList();
         try{
             Connection con= BD.getIns();
             Statement smt= con.createStatement();
-            ResultSet set= smt.executeQuery("Select * from multa where"
+            ResultSet set= smt.executeQuery("Select * from multa where "
                     + "activa=1 and codclie="+cod);
+            Multa nueva;
             while(set.next()){
                 nueva= new Multa();
                 nueva.setCod(set.getInt("codclie"));
                 nueva.setMont(set.getFloat("monto"));
                 nueva.setCodMul(set.getInt("codmulta"));
+                lista.add(nueva);
             }
             set.close();
             smt.close();
@@ -65,7 +69,7 @@ public class BaseMulta {
         }catch(ClassNotFoundException a){
             System.out.println(a);
         }
-        return nueva;
+        return lista;
     }
     public int codMayor(){
         int ret=0;

@@ -7,8 +7,6 @@ import javaapplication39.Clases.Cliente;
 import javaapplication39.Bases.BaseCliente;
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.FlowLayout;
-import java.awt.GridLayout;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.JButton;

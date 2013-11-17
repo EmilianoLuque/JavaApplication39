@@ -285,7 +285,6 @@ public class Devolucion extends JPanel {
                 tot= pre*multa;
                 if(multa>0){
                     int codmul= bm.codMayor()+1;
-                    System.out.println(codmul);
                     Multa mul= new Multa(CodigoClie, tot, codmul);
                     bm.agregar(mul);
                     JOptionPane.showMessageDialog(null,"Se ha creado una multa de $"

@@ -26,10 +26,13 @@ public class CompFecha {
         if(a%400==0) band=1;
         if(m<1||m>12) ret=2;
         if(m==2){
-            if(band==1)
+            if(band==1){
                 if(d<1||d>29) ret=1;
-            else
+            }
+            else{
                 if(d<1||d>28) ret=1;
+            }
+                
         }//m=2
         if(m==4||m==6||m==9||m==11)
                 if(d<1||d>30) ret=1;
