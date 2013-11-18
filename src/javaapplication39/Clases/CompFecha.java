@@ -9,7 +9,7 @@ package javaapplication39.Clases;
  * @author Usuario Normal
  */
 public class CompFecha {
-    int d,m,a;
+    private int d,m,a;
     public CompFecha(String ds, String ms, String as){
         this.d=Integer.parseInt(ds);
         this.m=Integer.parseInt(ms);

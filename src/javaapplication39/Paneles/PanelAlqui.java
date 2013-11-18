@@ -30,7 +30,7 @@ public class PanelAlqui extends JPanel {
     JTextField mont= new JTextField();
     JButton aceptar= new JButton("Aceptar");
     JButton cancelar= new JButton("Cancelar");
-    String fechent, fechact;
+    String fechent="", fechact="";
     int cantidad=0;
     public PanelAlqui(){
         cliente.setBounds(20, 20, 200, 21);
@@ -88,11 +88,15 @@ public class PanelAlqui extends JPanel {
                     bandera=1;
                 }
                 if(fech.getText().equalsIgnoreCase("")){
-                    JOptionPane.showMessageDialog(null, "No Ingreso una fecha", "Error", 0);
+                    JOptionPane.showMessageDialog(null, "No Ingreso una fecha de entrega", "Error", 0);
                     bandera=1;
                 }
                 if(mont.getText().equalsIgnoreCase("")){
                     JOptionPane.showMessageDialog(null, "Error de monto", "Error", 0);
+                    bandera=1;
+                }
+                if(fechact.equalsIgnoreCase("")){
+                    JOptionPane.showMessageDialog(null, "No ingreso una fecha actual", "Error", 0);
                     bandera=1;
                 }
                 if(bandera==0){

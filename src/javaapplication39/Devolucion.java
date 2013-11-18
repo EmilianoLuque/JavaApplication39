@@ -181,69 +181,76 @@ public class Devolucion extends JPanel {
             }
             else{
                 int codint= Integer.parseInt(cods);
-                todos=(ArrayList) ba.buscarPorCliente(codint);
-                if(todos.isEmpty()){
-                    JOptionPane.showMessageDialog(null,"No hay ningún alquiler "
-                            + "para ese cliente.","Mensaje",1);
-                    String columnas[]={"Codigo de Alquiler","Monto","Fecha","Cliente","Pelicula"};
-                    Object datos[][]= new Object[0][5];
-                    lista= new JScrollPane(tabla);
-                    lista.setVisible(true);
-                    lista.setBounds(150,30,850,395);
-                    setear.add(lista);
-                    lista.setVisible(false);
-                    diat.setEditable(false);
-                    mest.setEditable(false);
-                    aniot.setEditable(false);
-                    fe.setEnabled(false);
+                int algo= bc.buscarCodigo(codint);
+                if(algo==0){
+                    JOptionPane.showMessageDialog(null,"El cliente no esta en la"
+                                + " base de datos.","Mensaje",1);
                 }
                 else{
-                    String columnas[]={"Codigo de Alquiler","Monto","Fecha","Cliente","Pelicula"};
-                    Object datos[][]= new Object[todos.size()][5];
-                    Alquiler ayuda;
-                    Cliente ayudaclie;
-                    for(int i=0; i<todos.size();i++){
-                        ayuda= new Alquiler();
-                        ayuda=(Alquiler) todos.get(i);
-                        ayudaclie= bc.buscarCliente(ayuda.getCodClie());
-                        String NOMBclie= ayudaclie.getNomb();
-                        int CODalq= ayuda.getCodAlq();
-                        pelis=(ArrayList)bal.buscarAlquiler(CODalq);
-                        Alquilada help;
-                        Pelicula pel;
-                        help= new Alquilada();
-                        help=(Alquilada) pelis.get(0);
-                        pel= new Pelicula();
-                        pel=bp.buscarPelicula(help.getCodPeli());
-                        float alg= ayuda.getMonto();
-                        datos[i][0]=CODalq;
-                        datos[i][1]= alg;
-                        datos[i][2]= ayuda.getFechaAlquiler();
-                        datos[i][3]= NOMBclie;
-                        datos[i][4]=pel.getTitulo();
+                    todos=(ArrayList) ba.buscarPorCliente(codint);
+                    if(todos.isEmpty()){
+                        JOptionPane.showMessageDialog(null,"No hay ningún alquiler "
+                                + "para ese cliente.","Mensaje",1);
+                        String columnas[]={"Codigo de Alquiler","Monto","Fecha","Cliente","Pelicula"};
+                        Object datos[][]= new Object[0][5];
+                        lista= new JScrollPane(tabla);
+                        lista.setVisible(true);
+                        lista.setBounds(150,30,850,395);
+                        setear.add(lista);
+                        lista.setVisible(false);
+                        diat.setEditable(false);
+                        mest.setEditable(false);
+                        aniot.setEditable(false);
+                        fe.setEnabled(false);
                     }
-                    DefaultTableModel modelo = new DefaultTableModel(datos, columnas);
-                    tabla= new JTable(modelo);
-                    tabla.setEnabled(false);
-                    tabla.setBounds(0,0,850, 435);
-                    tabla.setGridColor(Color.gray);
-                    tabla.setBackground(Color.DARK_GRAY);
-                    tabla.setForeground(Color.white);
-                    tabla.setFont(new Font("Arial",Font.BOLD, 14));
-                    tabla.setRowHeight(21);
-                    tabla.setTableHeader(null);
-                    lista.setVisible(false);
-                    lista.removeAll();
-                    lista= new JScrollPane(tabla);
-                    lista.setVisible(true);
-                    lista.setBounds(150,30,850,365);
-                    setear.add(lista);
-                    diat.setEditable(true);
-                    mest.setEditable(true);
-                    aniot.setEditable(true);
-                    fe.setEnabled(true);
-                    CodigoClie= codint;
-                }//else vacia
+                    else{
+                        String columnas[]={"Codigo de Alquiler","Monto","Fecha","Cliente","Pelicula"};
+                        Object datos[][]= new Object[todos.size()][5];
+                        Alquiler ayuda;
+                        Cliente ayudaclie;
+                        for(int i=0; i<todos.size();i++){
+                            ayuda= new Alquiler();
+                            ayuda=(Alquiler) todos.get(i);
+                            ayudaclie= bc.buscarCliente(ayuda.getCodClie());
+                            String NOMBclie= ayudaclie.getNomb();
+                            int CODalq= ayuda.getCodAlq();
+                            pelis=(ArrayList)bal.buscarAlquiler(CODalq);
+                            Alquilada help;
+                            Pelicula pel;
+                            help= new Alquilada();
+                            help=(Alquilada) pelis.get(0);
+                            pel= new Pelicula();
+                            pel=bp.buscarPelicula(help.getCodPeli());
+                            float alg= ayuda.getMonto();
+                            datos[i][0]=CODalq;
+                            datos[i][1]= alg;
+                            datos[i][2]= ayuda.getFechaAlquiler();
+                            datos[i][3]= NOMBclie;
+                            datos[i][4]=pel.getTitulo();
+                        }
+                        DefaultTableModel modelo = new DefaultTableModel(datos, columnas);
+                        tabla= new JTable(modelo);
+                        tabla.setEnabled(false);
+                        tabla.setBounds(0,0,850, 435);
+                        tabla.setGridColor(Color.gray);
+                        tabla.setBackground(Color.DARK_GRAY);
+                        tabla.setForeground(Color.white);
+                        tabla.setFont(new Font("Arial",Font.BOLD, 14));
+                        tabla.setRowHeight(21);
+                        tabla.setTableHeader(null);
+                        lista.setVisible(false);
+                        lista.removeAll();
+                        lista= new JScrollPane(tabla);
+                        lista.setVisible(true);
+                        lista.setBounds(150,30,850,365);
+                        setear.add(lista);
+                        diat.setEditable(true);
+                        mest.setEditable(true);
+                        aniot.setEditable(true);
+                        fe.setEnabled(true);
+                        CodigoClie= codint;
+                    }//else vacia
+                }//cliente
             }//else campo
         }//action performed
     }//clase

@@ -9,8 +9,8 @@ package javaapplication39.Clases;
  * @author Usuario Normal
  */
 public class FechaEnt {
-    String ds,ms,as;
-    int d,m,a, mod=8;
+    private String ds,ms,as;
+    private int d,m,a, mod=8;
     public FechaEnt(String q,String w, String e){
         this.ds=q;
         this.ms=w;

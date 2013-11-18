@@ -46,6 +46,7 @@ public class ListaClientes extends JPanel{
         //--------
         clientes= (ArrayList) bc.buscarTodos();
         if(!clientes.isEmpty()){
+            System.out.println("asdasdad");
             String [] columnas={"Código","Documento","Nombre","Teléfono","Dirección"};
             Object [][] datos= new Object[clientes.size()][5];
             for(int i=0; i<clientes.size();i++){
@@ -66,9 +67,23 @@ public class ListaClientes extends JPanel{
             tabla.setFont(new Font("Arial",Font.BOLD, 14));
             tabla.setRowHeight(21);
             tabla.setEnabled(false);
+            tabla.setTableHeader(null);
+        }
+        else{
+            String [] columnas={"Código","Documento","Nombre","Teléfono","Dirección"};
+            Object [][] datos= new Object[0][5];
+            DefaultTableModel modelo = new DefaultTableModel(datos, columnas);
+            tabla= new JTable(modelo);
+            tabla.setBounds(0,0,995,465);
+            tabla.setGridColor(Color.gray);
+            tabla.setBackground(Color.DARK_GRAY);
+            tabla.setForeground(Color.white);
+            tabla.setFont(new Font("Arial",Font.BOLD, 14));
+            tabla.setRowHeight(21);
+            tabla.setEnabled(false);
+            tabla.setTableHeader(null);
         }
         //--------
-        tabla.setTableHeader(null);
         this.setBackground(Color.RED);
         a= new JScrollPane(tabla);
         //414

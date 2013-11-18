@@ -118,7 +118,22 @@ public class ListaPeliculas extends JPanel {
             tabla.setFont(new Font("Arial",Font.BOLD, 14));
             tabla.setEnabled(false);
             tabla.setRowHeight(21);
+            
             //----------
+        }
+        else{
+            String[] columnas = {"Codigo","Genero","Titulo","Formato","Autor","Ejemplares"};
+            Object datos[][]= new Object[0][6];
+            DefaultTableModel modelo = new DefaultTableModel(datos, columnas);
+            tabla= new JTable(modelo);
+            tabla.setBounds(0,0,845,414);
+            tabla.setGridColor(Color.gray);
+            tabla.setBackground(Color.DARK_GRAY);
+            tabla.setForeground(Color.white);
+            tabla.setFont(new Font("Arial",Font.BOLD, 14));
+            tabla.setEnabled(false);
+            tabla.setRowHeight(21);
+            tabla.setTableHeader(null);
         }
         this.setBackground(Color.DARK_GRAY);
         this.add(botones);
