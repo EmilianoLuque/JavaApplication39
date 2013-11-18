@@ -41,6 +41,7 @@ public class Ventana extends JFrame {
         beta.setBackground(Color.getHSBColor(0.75f, 1f,0.5f));
         beta.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 10));
         gama.setBounds(0,110, 995, 465);
+        gama.setForeground(Color.darkGray);
         sep.setBounds(0,100,1000,10);
         sep.setBackground(Color.BLACK);
         //------------------botones

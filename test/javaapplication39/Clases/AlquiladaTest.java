@@ -14,7 +14,6 @@ import static org.junit.Assert.*;
  * @author Usuario Normal
  */
 public class AlquiladaTest {
-    
     public AlquiladaTest() {
     }
 
@@ -25,53 +24,41 @@ public class AlquiladaTest {
     @AfterClass
     public static void tearDownClass() throws Exception {
     }
-
-    /**
-     * Test of setCodAlq method, of class Alquilada.
-     */
     @Test
     public void testSetCodAlq() {
+        Alquilada nueva= new Alquilada(5,2,"16-05-2013");
+        nueva.setCodAlq(1);
+        assertEquals(1, nueva.getCodAlq());
     }
-
-    /**
-     * Test of setCodPeli method, of class Alquilada.
-     */
     @Test
     public void testSetCodPeli() {
+        Alquilada nueva= new Alquilada(5,2,"16-05-2013");
+        nueva.setCodPeli(1);
+        assertEquals(1, nueva.getCodPeli());
     }
-
-    /**
-     * Test of setFech method, of class Alquilada.
-     */
     @Test
     public void testSetFech() {
+        Alquilada nueva= new Alquilada(5,2,"16-05-2013");
+        nueva.setFech("30-08-2013");
+        assertEquals("30-08-2013", nueva.getFecha());
     }
-
-    /**
-     * Test of getCodAlq method, of class Alquilada.
-     */
-    @Test
     public void testGetCodAlq() {
+        Alquilada nueva= new Alquilada(5,2,"16-05-2013");
+        assertEquals(5,nueva.getCodAlq());
     }
-
-    /**
-     * Test of getCodPeli method, of class Alquilada.
-     */
     @Test
     public void testGetCodPeli() {
+        Alquilada nueva= new Alquilada(5,2,"16-05-2013");
+        assertEquals(2,nueva.getCodPeli());
     }
-
-    /**
-     * Test of getActivo method, of class Alquilada.
-     */
     @Test
     public void testGetActivo() {
+        Alquilada nueva= new Alquilada(5,2,"16-05-2013");
+        assertEquals(1,nueva.getActivo());
     }
-
-    /**
-     * Test of getFecha method, of class Alquilada.
-     */
     @Test
     public void testGetFecha() {
+        Alquilada nueva= new Alquilada(5,2,"16-05-2013");
+        assertEquals("16-05-2013",nueva.getFecha());
     }
 }

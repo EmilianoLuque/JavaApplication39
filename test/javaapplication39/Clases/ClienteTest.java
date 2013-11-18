@@ -25,74 +25,60 @@ public class ClienteTest {
     @AfterClass
     public static void tearDownClass() throws Exception {
     }
-
-    /**
-     * Test of setNomb method, of class Cliente.
-     */
     @Test
     public void testSetNomb() {
+        Cliente nuevo= new Cliente("Luque Emiliano", "Chacabuco 89", 1234567, 37089182, 47);
+        nuevo.setNomb("Roque Gomez");
+        assertEquals("Roque Gomez", nuevo.getNomb());
     }
-
-    /**
-     * Test of setDir method, of class Cliente.
-     */
     @Test
     public void testSetDir() {
+        Cliente nuevo= new Cliente("Luque Emiliano", "Chacabuco 89", 1234567, 37089182, 47);
+        nuevo.setDir("Carlos Quiroga 3207");
+        assertEquals("Carlos Quiroga 3207", nuevo.getDir());
     }
-
-    /**
-     * Test of setTel method, of class Cliente.
-     */
     @Test
     public void testSetTel() {
+        Cliente nuevo= new Cliente("Luque Emiliano", "Chacabuco 89", 1234567, 37089182, 47);
+        nuevo.setTel(4444170);
+        assertEquals(4444170, nuevo.getTel());
+        
     }
-
-    /**
-     * Test of setDni method, of class Cliente.
-     */
     @Test
     public void testSetDni() {
+        Cliente nuevo= new Cliente("Luque Emiliano", "Chacabuco 89", 1234567, 37089182, 47);
+        nuevo.setDni(37180089);
+        assertEquals(37180089, nuevo.getDni());
     }
-
-    /**
-     * Test of getNomb method, of class Cliente.
-     */
     @Test
     public void testGetNomb() {
+        Cliente nuevo= new Cliente("Luque Emiliano", "Chacabuco 89", 1234567, 37089182, 47);
+        assertEquals("Luque Emiliano", nuevo.getNomb());
     }
-
-    /**
-     * Test of getDir method, of class Cliente.
-     */
     @Test
     public void testGetDir() {
+        Cliente nuevo= new Cliente("Luque Emiliano", "Chacabuco 89", 1234567, 37089182, 47);
+        assertEquals("Chacabuco 89", nuevo.getDir());
     }
-
-    /**
-     * Test of getTel method, of class Cliente.
-     */
     @Test
     public void testGetTel() {
+        Cliente nuevo= new Cliente("Luque Emiliano", "Chacabuco 89", 1234567, 37089182, 47);
+        assertEquals(1234567, nuevo.getTel());
     }
-
-    /**
-     * Test of getDni method, of class Cliente.
-     */
     @Test
     public void testGetDni() {
+        Cliente nuevo= new Cliente("Luque Emiliano", "Chacabuco 89", 1234567, 37089182, 47);
+        assertEquals(37089182, nuevo.getDni());
     }
-
-    /**
-     * Test of getCod method, of class Cliente.
-     */
     @Test
     public void testGetCod() {
+        Cliente nuevo= new Cliente("Luque Emiliano", "Chacabuco 89", 1234567, 37089182, 47);
+        assertEquals(47, nuevo.getCod());
     }
-
-    /**
-     * Test of setCod method, of class Cliente.
-     */
     @Test
     public void testSetCod() {
+        Cliente nuevo= new Cliente("Luque Emiliano", "Chacabuco 89", 1234567, 37089182, 47);
+        nuevo.setCod(60);
+        assertEquals(60, nuevo.getCod());
     }
 }

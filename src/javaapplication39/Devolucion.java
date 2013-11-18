@@ -70,7 +70,7 @@ public class Devolucion extends JPanel {
         cliecod.setForeground(Color.black);
         cliecodt.setBounds(10, 50, 120, 30);
         buscar.setBounds(20,90,100,30);
-        buscar.addActionListener(new BotonCodigo());
+        buscar.addActionListener(new BotonCodigo(this));
         ccod.setFont(new Font("Arial", Font.BOLD,14));
         ccod.setForeground(Color.black);
         ccod.setBounds(10,0,200,30);
@@ -114,7 +114,7 @@ public class Devolucion extends JPanel {
         alqt.setEditable(false);
         al.setBounds(720,15,100,31);
         al.setEnabled(false);
-        al.addActionListener(new BotonAlqui());
+        al.addActionListener(new BotonAlqui(this));
         codigo.add(al);
         codigo.add(alqt);
         codigo.add(alq);
@@ -135,10 +135,10 @@ public class Devolucion extends JPanel {
         cliente.add(cliecodt);
         cliente.add(cliecod);
         cliente.setLayout(null);
-        cliente.setBackground(Color.red);
+        cliente.setBackground(Color.getHSBColor(0.84f, .5f, .5f));
         cliente.setBounds(0,0,150,465);
         cabeza.setLayout(null);
-        cabeza.setBackground(Color.blue);
+        cabeza.setBackground(Color.getHSBColor(0.28f, .5f, .5f));
         cabeza.setBounds(150,0,850,30);
         lista.setBackground(Color.darkGray);
         String columnas[]={"Codigo de Alquiler","Monto","Fecha","Cliente","Pelicula"};
@@ -147,9 +147,9 @@ public class Devolucion extends JPanel {
         tabla= new JTable(modelo);
         tabla.setEnabled(false);
         tabla.setBackground(Color.darkGray);
-        tabla.setBounds(0,0,850, 365);            
-        lista.add(tabla);
-        lista.setLayout(null);
+        tabla.setBounds(0,0,850, 365);
+        tabla.setTableHeader(null);
+        lista= new JScrollPane(tabla);
         lista.setBounds(150,30,850,395);
         codigo.setLayout(null);
         codigo.setBounds(150,395,850,70);
@@ -170,6 +170,9 @@ public class Devolucion extends JPanel {
         JTable tabla;
         JPanel setear= new JPanel();
         JScrollPane scroll= new JScrollPane();
+        public BotonCodigo(JPanel a){
+            this.setear= a;
+        }
         @Override
         public void actionPerformed(ActionEvent e){
             String cods= cliecodt.getText();
@@ -182,6 +185,12 @@ public class Devolucion extends JPanel {
                 if(todos.isEmpty()){
                     JOptionPane.showMessageDialog(null,"No hay ningún alquiler "
                             + "para ese cliente.","Mensaje",1);
+                    String columnas[]={"Codigo de Alquiler","Monto","Fecha","Cliente","Pelicula"};
+                    Object datos[][]= new Object[0][5];
+                    lista= new JScrollPane(tabla);
+                    lista.setVisible(true);
+                    lista.setBounds(150,30,850,395);
+                    setear.add(lista);
                     lista.setVisible(false);
                     diat.setEditable(false);
                     mest.setEditable(false);
@@ -196,7 +205,7 @@ public class Devolucion extends JPanel {
                     for(int i=0; i<todos.size();i++){
                         ayuda= new Alquiler();
                         ayuda=(Alquiler) todos.get(i);
-                        ayudaclie= bc.buscarCliente(ayuda.getCodAlq());
+                        ayudaclie= bc.buscarCliente(ayuda.getCodClie());
                         String NOMBclie= ayudaclie.getNomb();
                         int CODalq= ayuda.getCodAlq();
                         pelis=(ArrayList)bal.buscarAlquiler(CODalq);
@@ -222,10 +231,13 @@ public class Devolucion extends JPanel {
                     tabla.setForeground(Color.white);
                     tabla.setFont(new Font("Arial",Font.BOLD, 14));
                     tabla.setRowHeight(21);
+                    tabla.setTableHeader(null);
                     lista.setVisible(false);
                     lista.removeAll();
-                    lista.add(tabla);
+                    lista= new JScrollPane(tabla);
                     lista.setVisible(true);
+                    lista.setBounds(150,30,850,365);
+                    setear.add(lista);
                     diat.setEditable(true);
                     mest.setEditable(true);
                     aniot.setEditable(true);
@@ -270,7 +282,12 @@ public class Devolucion extends JPanel {
         BaseAlquiler ba= new BaseAlquiler();
         BasePrecio bp= new BasePrecio();
         BaseMulta bm= new BaseMulta();
+        BaseAlquilada bas= new BaseAlquilada();
         float tot=0, pre=0;
+        JPanel setear= new JPanel();
+        public BotonAlqui(JPanel a){
+            this.setear=a;
+        }
         @Override
         public void actionPerformed(ActionEvent e){
             if(alqt.getText().equalsIgnoreCase(""))
@@ -281,7 +298,7 @@ public class Devolucion extends JPanel {
                 Alquiler des= ba.buscar(cod);
                 CalcularMulta calc= new CalcularMulta(des.getFechaEntrega(),Fechaactual);
                 int multa=calc.calcular();
-                pre=bp.getPrecio();
+                pre=des.getMonto();
                 tot= pre*multa;
                 if(multa>0){
                     int codmul= bm.codMayor()+1;
@@ -289,9 +306,37 @@ public class Devolucion extends JPanel {
                     bm.agregar(mul);
                     JOptionPane.showMessageDialog(null,"Se ha creado una multa de $"
                             +tot,"Mensaje",1);
-                    //desactivar el alquiler
-                    
                 }//multa
+                ba.desactivo(cod);
+                bas.desactivo(cod);
+                alqt.setEditable(false);
+                alqt.setText("");
+                al.setEnabled(false);
+                diat.setEditable(false);
+                diat.setText("");
+                mest.setEditable(false);
+                mest.setText("");
+                aniot.setEditable(false);
+                aniot.setText("");
+                fe.setEnabled(false);
+                String columnas[]={"Codigo de Alquiler","Monto","Fecha","Cliente","Pelicula"};
+                Object datos[][]= new Object[0][5];
+                DefaultTableModel modelo = new DefaultTableModel(datos, columnas);
+                tabla= new JTable(modelo);
+                tabla.setEnabled(false);
+                tabla.setBounds(0,0,850, 435);
+                tabla.setGridColor(Color.gray);
+                tabla.setBackground(Color.DARK_GRAY);
+                tabla.setForeground(Color.white);
+                tabla.setFont(new Font("Arial",Font.BOLD, 14));
+                tabla.setTableHeader(null);
+                tabla.setRowHeight(21);
+                lista.setVisible(false);
+                lista.removeAll();
+                lista= new JScrollPane(tabla);
+                lista.setVisible(true);
+                lista.setBounds(150,30,850,395);
+                setear.add(lista);
             }//else
         }//action
     }//clase

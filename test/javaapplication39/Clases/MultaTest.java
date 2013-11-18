@@ -25,53 +25,42 @@ public class MultaTest {
     @AfterClass
     public static void tearDownClass() throws Exception {
     }
-
-    /**
-     * Test of setMont method, of class Multa.
-     */
     @Test
     public void testSetMont() {
+        Multa a= new Multa(4, 7.5f, 8);
+        a.setMont(8.5f);
+        assertEquals(8.5f, a.getMonto(),0f);
     }
-
-    /**
-     * Test of setCod method, of class Multa.
-     */
     @Test
     public void testSetCod() {
+        Multa a= new Multa(4, 7.5f, 8);
+        a.setCod(6);
+        assertEquals(6, a.getCod());
     }
-
-    /**
-     * Test of setCodMul method, of class Multa.
-     */
     @Test
     public void testSetCodMul() {
+        Multa a= new Multa(4, 7.5f, 8);
+        a.setCodMul(15);
+        assertEquals(15, a.getCodMul());
     }
-
-    /**
-     * Test of getMonto method, of class Multa.
-     */
     @Test
     public void testGetMonto() {
+        Multa a= new Multa(4, 7.5f, 8);
+        assertEquals(7.5f, a.getMonto(),0f);
     }
-
-    /**
-     * Test of getCod method, of class Multa.
-     */
     @Test
     public void testGetCod() {
+        Multa a= new Multa(4, 7.5f, 8);
+        assertEquals(4, a.getCod());
     }
-
-    /**
-     * Test of getActivo method, of class Multa.
-     */
     @Test
     public void testGetActivo() {
+        Multa a= new Multa(4, 7.5f, 8);
+        assertEquals(1, a.getActivo());
     }
-
-    /**
-     * Test of getCodMul method, of class Multa.
-     */
     @Test
     public void testGetCodMul() {
+        Multa a= new Multa(4, 7.5f, 8);
+        assertEquals(8, a.getCodMul());
     }
 }

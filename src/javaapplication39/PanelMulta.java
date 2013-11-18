@@ -39,7 +39,7 @@ public class PanelMulta extends JPanel {
     JPanel cabeza= new JPanel();
     JLabel cc= new JLabel("Codigo de Multa");
     JLabel mc= new JLabel("Monto");
-    JScrollPane lista= new JScrollPane();
+    JScrollPane lista;
     JLabel dia= new JLabel("Día");
     JTextField diat= new JTextField("");
     JLabel mes= new JLabel("Mes");
@@ -71,7 +71,7 @@ public class PanelMulta extends JPanel {
         codclie.setForeground(Color.black);
         codclie.setBounds(50, 20, 180, 30);
         codcliet.setBounds(250, 20, 100, 30);
-        clienteb.addActionListener(new BotonClie());
+        clienteb.addActionListener(new BotonClie(this));
         clienteb.setBounds(183,60,100,21);
         codmul.setFont(new Font("Arial",Font.PLAIN,21));
         codmul.setForeground(Color.black);
@@ -80,7 +80,7 @@ public class PanelMulta extends JPanel {
         codmult.setEditable(false);
         multab.setBounds(183,370,100,21);
         multab.setEnabled(false);
-        multab.addActionListener(new BotonMul());
+        multab.addActionListener(new BotonMul(this));
         //fecha
         fa.setFont(new Font("Arial",Font.PLAIN,21));
         fa.setForeground(Color.black);
@@ -135,8 +135,8 @@ public class PanelMulta extends JPanel {
         tabla.setFont(new Font("Arial",Font.BOLD, 14));
         tabla.setRowHeight(21);
         tabla.setBounds(0,0,498, 465);
-        lista.add(tabla);
-        lista.setLayout(null);
+        tabla.setTableHeader(null);
+        lista= new JScrollPane(tabla);
         lista.setBounds(497, 30, 498, 435);
         lista.setBackground(Color.darkGray);
         this.add(cabeza);
@@ -149,6 +149,10 @@ public class PanelMulta extends JPanel {
         BaseCliente bc= new BaseCliente();
         BaseMulta bm= new BaseMulta();
         ArrayList multas= new ArrayList();
+        JPanel a = new JPanel();
+        public BotonClie(JPanel b){
+            this.a=b;
+        }
         @Override
         public void actionPerformed(ActionEvent e){
             if(codcliet.getText().equalsIgnoreCase("")){
@@ -186,10 +190,12 @@ public class PanelMulta extends JPanel {
                         tabla.setFont(new Font("Arial",Font.BOLD, 14));
                         tabla.setRowHeight(21);
                         tabla.setBounds(0,0,498, 435);
+                        tabla.setTableHeader(null);
                         lista.setVisible(false);
-                        lista.removeAll();
-                        lista.add(tabla);
+                        lista= new JScrollPane(tabla);
                         lista.setVisible(true);
+                        lista.setBounds(497, 30, 498, 435);
+                        a.add(lista);
                         diat.setEditable(true);
                         mest.setEditable(true);
                         aniot.setEditable(true);
@@ -250,6 +256,10 @@ public class PanelMulta extends JPanel {
     }//clase
     public class BotonMul implements ActionListener{
         BaseMulta bmul= new BaseMulta();
+        JPanel b= new JPanel();
+        public BotonMul(JPanel a){
+            this.b=a;
+        }
         @Override
         public void actionPerformed(ActionEvent e){
             if(codmult.getText().equalsIgnoreCase(""))
@@ -274,7 +284,6 @@ public class PanelMulta extends JPanel {
                 DefaultTableModel modelo = new DefaultTableModel(datost, columnas);
                 tabla= new JTable(modelo);
                 tabla.setEnabled(false);
-                tabla.setEnabled(false);
                 tabla.setBounds(0,0,850, 435);
                 tabla.setGridColor(Color.gray);
                 tabla.setBackground(Color.DARK_GRAY);
@@ -283,8 +292,12 @@ public class PanelMulta extends JPanel {
                 tabla.setRowHeight(21);
                 tabla.setBounds(0,0,498, 435);
                 lista.setVisible(false);
-                lista.removeAll();
-                lista.add(tabla);
+                tabla.setTableHeader(null);
+                lista.setVisible(false);
+                lista= new JScrollPane(tabla);
+                lista.setVisible(true);
+                lista.setBounds(497, 30, 498, 435);
+                b.add(lista);
                 lista.setVisible(true);
             }
         }//action

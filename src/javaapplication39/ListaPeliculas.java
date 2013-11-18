@@ -44,31 +44,31 @@ public class ListaPeliculas extends JPanel {
         cod.setBounds(30, 65, 100, 30);
         cod.setBackground(Color.BLACK);
         cod.setForeground(Color.YELLOW);
-        cod.addActionListener(new BotonListener());
+        cod.addActionListener(new BotonListener(this));
         gen.setBounds(30, 110, 100, 30);
         gen.setBackground(Color.BLACK);
         gen.setForeground(Color.YELLOW);
-        gen.addActionListener(new BotonListener());
+        gen.addActionListener(new BotonListener(this));
         tit.setBounds(30, 155, 100, 30);
         tit.setBackground(Color.BLACK);
         tit.setForeground(Color.YELLOW);
-        tit.addActionListener(new BotonListener());
+        tit.addActionListener(new BotonListener(this));
         ejem.setBounds(30, 200, 100, 30);
         ejem.setBackground(Color.BLACK);
         ejem.setForeground(Color.YELLOW);
-        ejem.addActionListener(new BotonListener());
+        ejem.addActionListener(new BotonListener(this));
         botones.add(busc);
         botones.add(cod);
         botones.add(gen);
         botones.add(tit);
         botones.add(ejem);
         botones.setBounds(0, 0, 150, 465);
-        botones.setBackground(Color.red);
+        botones.setBackground(Color.getHSBColor(0.84f, .5f, .5f));
         //--------
         this.setBounds(0, 0, 985, 465);
         this.setLayout(null);
         orden.setBounds(150,0 , 850, 50);
-        orden.setBackground(Color.BLUE);
+        orden.setBackground(Color.getHSBColor(0.28f, .5f, .5f));
         orden.setLayout(null);
         codigo.setBounds(5, 18, 100, 30);
         codigo.setForeground(Color.BLACK);
@@ -123,10 +123,9 @@ public class ListaPeliculas extends JPanel {
         this.setBackground(Color.DARK_GRAY);
         this.add(botones);
         this.add(orden);
+        tabla.setTableHeader(null);
+        scroll= new JScrollPane(tabla);
         scroll.setBounds(150,50,845,414);
-        scroll.add(tabla);
-        scroll.setLayout(null);
-        scroll.setBackground(Color.darkGray);
         this.add(scroll);
         this.setVisible(true);
     }
@@ -135,6 +134,10 @@ public class ListaPeliculas extends JPanel {
         JLabel asd= new JLabel("asdasdasdasd");
         JTable tabla;
         BasePelicula bp= new BasePelicula();
+        JPanel algo= new JPanel();
+        public BotonListener(JPanel a){
+            this.algo=a;
+        }
         @Override
         public void actionPerformed(ActionEvent e){
             if(e.getSource()==cod){
@@ -162,10 +165,12 @@ public class ListaPeliculas extends JPanel {
                     tabla.setEnabled(false);
                     tabla.setRowHeight(21);
                     tabla.setVisible(true);
+                    tabla.setTableHeader(null);
                     scroll.setVisible(false);
-                    scroll.removeAll();
-                    scroll.add(tabla);
+                    scroll= new JScrollPane(tabla);
                     scroll.setVisible(true);
+                    scroll.setBounds(150,50,845,414);
+                    algo.add(scroll);
                 }
             }
             if(e.getSource()==gen){
@@ -192,10 +197,12 @@ public class ListaPeliculas extends JPanel {
                     tabla.setFont(new Font("Arial",Font.BOLD, 14));
                     tabla.setEnabled(false);
                     tabla.setRowHeight(21);
+                    tabla.setTableHeader(null);
                     scroll.setVisible(false);
-                    scroll.removeAll();
-                    scroll.add(tabla);
+                    scroll= new JScrollPane(tabla);
                     scroll.setVisible(true);
+                    scroll.setBounds(150,50,845,414);
+                    algo.add(scroll);
                 }
             }
             if(e.getSource()==tit){
@@ -224,8 +231,12 @@ public class ListaPeliculas extends JPanel {
                     tabla.setRowHeight(21);
                     scroll.setVisible(false);
                     scroll.removeAll();
-                    scroll.add(tabla);
+                    tabla.setTableHeader(null);
+                    scroll.setVisible(false);
+                    scroll= new JScrollPane(tabla);
                     scroll.setVisible(true);
+                    scroll.setBounds(150,50,845,414);
+                    algo.add(scroll);
                 }
             }
             if(e.getSource()==ejem){
@@ -254,8 +265,12 @@ public class ListaPeliculas extends JPanel {
                     tabla.setRowHeight(21);
                     scroll.setVisible(false);
                     scroll.removeAll();
-                    scroll.add(tabla);
+                    tabla.setTableHeader(null);
+                    scroll.setVisible(false);
+                    scroll= new JScrollPane(tabla);
                     scroll.setVisible(true);
+                    scroll.setBounds(150,50,845,414);
+                    algo.add(scroll);
                 }
             }
         }

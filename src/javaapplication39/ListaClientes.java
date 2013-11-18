@@ -7,6 +7,7 @@ package javaapplication39;
 import javaapplication39.Clases.Cliente;
 import javaapplication39.Bases.BaseCliente;
 import java.awt.Color;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.util.ArrayList;
 import javax.swing.JPanel;
@@ -14,6 +15,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.ScrollPaneLayout;
 import javax.swing.table.DefaultTableModel;
 /**
  *
@@ -66,11 +68,16 @@ public class ListaClientes extends JPanel{
             tabla.setEnabled(false);
         }
         //--------
+        tabla.setTableHeader(null);
         this.setBackground(Color.RED);
-        a= new JScrollPane();
-        a.add(tabla);
-        a.setLayout(null);
-        a.setBounds(0,50,995,465);
+        a= new JScrollPane(tabla);
+        //414
+        //clientes.size()*23
+        a.setBounds(0,50,995,414);
+        a.setBackground(Color.DARK_GRAY);
+        a.setForeground(Color.darkGray);
+        this.setBackground(Color.DARK_GRAY);
+        this.setForeground(Color.DARK_GRAY);
         this.add(a);
         this.add(orden);
     }

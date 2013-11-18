@@ -110,6 +110,7 @@ public class PanelAlqui extends JPanel {
                     clie.setText("");
                     fechact="";
                     fechent="";
+                    cantidad=0;
                     JOptionPane.showMessageDialog(null, "Alquiler almacenado", "Mensaje", 1);
                 }
                 bandera=0;
@@ -121,7 +122,9 @@ public class PanelAlqui extends JPanel {
                 clie.setText("");
                 fechact="";
                 fechent="";
+                cantidad=0;
                 JOptionPane.showMessageDialog(null, "Alquiler cancelado", "Mensaje", 1);
+                ba.desactivo(bar.codigoMayor()+1);
             }
         }
     }
