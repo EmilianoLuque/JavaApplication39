@@ -34,7 +34,7 @@ public class Ventana extends JFrame {
     JLabel uno= new JLabel("uno");
     JLabel dos= new JLabel("dos");
     public Ventana(){
-        super("Beta");
+        super("Laboratorio 2013");
         //---------paneles
         this.setBounds(50, 50, 1000, 600);
         beta.setBounds(0,0,1000,100);
@@ -48,7 +48,7 @@ public class Ventana extends JFrame {
         alqui= new JButton("Alquiler");
         agcliente= new JButton("Agregar Cliente");
         listcliente= new JButton("Lista de Clientes");
-        listpeliculas= new JButton("Peliculas");
+        listpeliculas= new JButton("Películas");
         agpelicula= new JButton("Agregar Pelicula");
         devo= new JButton("Devolución");
         multa= new JButton("Multas");

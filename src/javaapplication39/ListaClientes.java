@@ -7,7 +7,6 @@ package javaapplication39;
 import javaapplication39.Clases.Cliente;
 import javaapplication39.Bases.BaseCliente;
 import java.awt.Color;
-import java.awt.FlowLayout;
 import java.awt.Font;
 import java.util.ArrayList;
 import javax.swing.JPanel;
@@ -15,7 +14,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.ScrollPaneLayout;
 import javax.swing.table.DefaultTableModel;
 /**
  *
@@ -46,7 +44,6 @@ public class ListaClientes extends JPanel{
         //--------
         clientes= (ArrayList) bc.buscarTodos();
         if(!clientes.isEmpty()){
-            System.out.println("asdasdad");
             String [] columnas={"Código","Documento","Nombre","Teléfono","Dirección"};
             Object [][] datos= new Object[clientes.size()][5];
             for(int i=0; i<clientes.size();i++){

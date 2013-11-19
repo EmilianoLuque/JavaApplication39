@@ -88,4 +88,23 @@ public class BaseMulta {
         }
         return ret;
     }
+    public int multado(int cod){
+        int ret=0;
+        try{
+            Connection con= BD.getIns();
+            Statement smt= con.createStatement();
+            ResultSet set= smt.executeQuery("Select * from multa where "
+                    + "activa=1 and codclie="+cod);
+            while(set.next()){
+                ret=1;
+            }
+            set.close();
+            smt.close();
+        }catch(SQLException e){
+            System.out.println(e);
+        }catch(ClassNotFoundException a){
+            System.out.println(a);
+        }
+        return ret;
+    }
 }

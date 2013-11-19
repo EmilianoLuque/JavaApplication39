@@ -146,7 +146,6 @@ public class ListaPeliculas extends JPanel {
     }
     public class BotonListener implements ActionListener{
         ArrayList pelis= new ArrayList();
-        JLabel asd= new JLabel("asdasdasdasd");
         JTable tabla;
         BasePelicula bp= new BasePelicula();
         JPanel algo= new JPanel();

@@ -13,6 +13,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javaapplication39.Bases.BaseAlquilada;
 import javaapplication39.Bases.BaseAlquiler;
+import javaapplication39.Bases.BaseMulta;
 import javaapplication39.Clases.Alquiler;
 import javax.swing.JOptionPane;
 /**
@@ -75,6 +76,7 @@ public class PanelAlqui extends JPanel {
     public class BotonAlquiler implements ActionListener{
         BaseAlquiler bar= new BaseAlquiler();
         BaseAlquilada ba= new BaseAlquilada();
+        BaseMulta bm= new BaseMulta();
         int bandera=0;
         @Override
         public void actionPerformed(ActionEvent e){
@@ -101,21 +103,37 @@ public class PanelAlqui extends JPanel {
                 }
                 if(bandera==0){
                     int codclie= Integer.parseInt(clie.getText());
-                    float monot= Float.parseFloat(mont.getText());
-                    int codalqui= bar.codigoMayor()+1;
-                    /*String entrega= f.fechaent;
-                    String actual= f.fechact;*/
-                    Alquiler nuevo= new Alquiler(codclie, fechact, monot, fechent, codalqui);
-                    bar.agregar(nuevo);
-                    //limpio todo
-                    mont.setText("");
-                    fech.setText("");
-                    pel.setText("");
-                    clie.setText("");
-                    fechact="";
-                    fechent="";
-                    cantidad=0;
-                    JOptionPane.showMessageDialog(null, "Alquiler almacenado", "Mensaje", 1);
+                    int alg=bm.multado(codclie);
+                    if(alg==0){
+                        float monot= Float.parseFloat(mont.getText());
+                        int codalqui= bar.codigoMayor()+1;
+                        /*String entrega= f.fechaent;
+                        String actual= f.fechact;*/
+                        Alquiler nuevo= new Alquiler(codclie, fechact, monot, fechent, codalqui);
+                        bar.agregar(nuevo);
+                        //limpio todo
+                        mont.setText("");
+                        fech.setText("");
+                        pel.setText("");
+                        clie.setText("");
+                        fechact="";
+                        fechent="";
+                        cantidad=0;
+                        JOptionPane.showMessageDialog(null, "Alquiler almacenado", "Mensaje", 1);
+                    }
+                    else{
+                        JOptionPane.showMessageDialog(null, "El cliente tiene una multa pendiente."
+                                + " Por favor cancele la multa antes de continuar", "Mensaje", 1);
+                        JOptionPane.showMessageDialog(null, "Alquiler cancelado", "Mensaje", 1);
+                        mont.setText("");
+                        fech.setText("");
+                        pel.setText("");
+                        clie.setText("");
+                        fechact="";
+                        fechent="";
+                        cantidad=0;
+                        ba.desactivo(bar.codigoMayor()+1);
+                    }
                 }
                 bandera=0;
             }
