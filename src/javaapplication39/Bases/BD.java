@@ -17,7 +17,7 @@ public class BD {
             String url="jdbc:postgresql://127.0.0.1:5432/Lab";
             String driver="org.postgresql.Driver";
             String user="postgres";
-            String pass="quepuedeser";
+            String pass="123456";
             Class.forName(driver);
             ins= DriverManager.getConnection(url, user, pass);
         }
